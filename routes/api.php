@@ -15,17 +15,16 @@ Route::post('/login', [AuthController::class, 'login']);
 Route::middleware('auth:sanctum')->group(function () {
     // Auth routes
     Route::post('/logout', [AuthController::class, 'logout']);
+    Route::get('/me', [AuthController::class, 'me']); // Fixed: Added missing /me route
     Route::get('/user', [AuthController::class, 'user']);
     Route::post('/reset-password', [AuthController::class, 'resetPassword']);
+    
     // Client routes - available to all authenticated users
-
     Route::apiResource('clients', ClientController::class);
     
     // Invoice routes
     Route::apiResource('invoices', InvoiceController::class);
     Route::get('invoices/export', [InvoiceController::class, 'export']);
-    Route::get('/clients', [ClientController::class, 'index']);
-    Route::get('/clients/{client}', [ClientController::class, 'show']);
     
     // Contact routes - available to all authenticated users
     Route::get('/contacts', [ContactController::class, 'index']);
@@ -33,13 +32,6 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('/contacts', [ContactController::class, 'store']);
     Route::put('/contacts/{contact}', [ContactController::class, 'update']);
     Route::delete('/contacts/{contact}', [ContactController::class, 'destroy']);
-    
-    // Invoice routes - available to all authenticated users
-    Route::get('/invoices', [InvoiceController::class, 'index']);
-    Route::get('/invoices/{invoice}', [InvoiceController::class, 'show']);
-    Route::post('/invoices', [InvoiceController::class, 'store']);
-    Route::put('/invoices/{invoice}', [InvoiceController::class, 'update']);
-    Route::delete('/invoices/{invoice}', [InvoiceController::class, 'destroy']);
 
     // Client relationship routes
     Route::get('/clients/{client}/contacts', [ClientController::class, 'getContacts']);
