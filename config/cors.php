@@ -4,8 +4,10 @@ return [
     'paths' => ['api/*', 'sanctum/csrf-cookie'],
     'allowed_methods' => ['*'],
     'allowed_origins' => [
-        'https://your-frontend-domain.up.railway.app',
+        'https://crmappfront-production.up.railway.app',
         'http://localhost:3000', // for development
+        'http://localhost:5173', // For Vite dev server
+        '*' 
     ],
     'allowed_origins_patterns' => [],
     'allowed_headers' => ['*'],
